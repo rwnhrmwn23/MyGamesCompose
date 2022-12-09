@@ -1,4 +1,4 @@
-package com.onedev.mygamescompose
+package com.onedev.mygamescompose.ui.screens.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,7 +8,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.onedev.mygamescompose.ui.theme.MyGamesComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +20,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    
+                    GamesApp()
                 }
             }
         }
