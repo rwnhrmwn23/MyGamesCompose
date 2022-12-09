@@ -1,7 +1,7 @@
 package com.onedev.mygamescompose.core.di
 
 import com.onedev.mygamescompose.BuildConfig
-import com.onedev.mygamescompose.core.network.ApiService
+import com.onedev.mygamescompose.core.data.source.remote.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

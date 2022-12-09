@@ -1,6 +1,6 @@
-package com.onedev.mygamescompose.core.model
+package com.onedev.mygamescompose.core.data.source.remote.response
 
-data class Users(
+data class UsersResponse(
     val `data`: List<Data>?,
     val page: Int?,
     val per_page: Int?,

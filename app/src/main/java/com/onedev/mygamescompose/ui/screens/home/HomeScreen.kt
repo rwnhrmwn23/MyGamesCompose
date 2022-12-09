@@ -3,28 +3,30 @@ package com.onedev.mygamescompose.ui.screens.home
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.onedev.mygamescompose.core.data.source.remote.network.StateEvent
 import com.onedev.mygamescompose.ui.theme.MyGamesComposeTheme
-import com.onedev.mygamescompose.utils.UIState
 
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
-    homeViewModel.users.collectAsState().value.let { response ->
+    homeViewModel.users.collectAsState(initial = StateEvent.Loading()).value.let { response ->
         when (response) {
-            is UIState.Loading -> {
+            is StateEvent.Loading -> {
+                CircularProgressIndicator()
                 homeViewModel.users()
             }
-            is UIState.Success -> {
+            is StateEvent.Success -> {
                 LazyColumn {
-                    val data = response.data.data
-                    if (data?.isNotEmpty() == true) {
+                    val data = response.data
+                    if (data.isNotEmpty()) {
                         items(data) { item ->
                             UserItem(
                                 name = item.first_name + " " + item.last_name,
@@ -34,10 +36,9 @@ fun HomeScreen(
                     }
                 }
             }
-            is UIState.Error -> {
+            is StateEvent.Error -> {
 
             }
-            else -> { }
         }
     }
 }

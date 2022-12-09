@@ -1,7 +1,11 @@
 package com.onedev.mygamescompose.core.di
 
-import com.onedev.mygamescompose.core.network.ApiService
-import com.onedev.mygamescompose.core.repository.GameRepository
+import com.onedev.mygamescompose.core.data.source.remote.RemoteDataSource
+import com.onedev.mygamescompose.core.data.source.remote.network.ApiService
+import com.onedev.mygamescompose.core.domain.repository.MainRepository
+import com.onedev.mygamescompose.core.domain.repository.MainRepositoryImpl
+import com.onedev.mygamescompose.core.domain.usecase.MainInteractor
+import com.onedev.mygamescompose.core.domain.usecase.MainUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +17,19 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Singleton
     @Provides
-    fun provideGameRepository(apiService: ApiService) : GameRepository {
-        return GameRepository(apiService)
+    fun provideRemoteDataSource(apiService: ApiService) : RemoteDataSource {
+        return RemoteDataSource(apiService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMainRepository(remoteDataSource: RemoteDataSource) : MainRepository {
+        return MainRepositoryImpl(remoteDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMainInteractor(mainRepository: MainRepository): MainUseCase {
+        return MainInteractor(mainRepository)
     }
 }
