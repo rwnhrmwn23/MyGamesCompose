@@ -1,9 +1,9 @@
 package com.onedev.mygamescompose.core.domain.usecase
 
 import com.onedev.mygamescompose.core.data.source.remote.network.StateEvent
-import com.onedev.mygamescompose.core.domain.model.Users
+import com.onedev.mygamescompose.core.domain.model.Games
 import kotlinx.coroutines.flow.Flow
 
 interface MainUseCase {
-    fun users(): Flow<StateEvent<List<Users>>>
+    fun games(pageSize: Int): Flow<StateEvent<List<Games>>>
 }

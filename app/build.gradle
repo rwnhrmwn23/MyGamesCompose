@@ -16,6 +16,8 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "BASE_URL", '"https://api.rawg.io/api/"'
+        buildConfigField "String", "API_KEY", '"d084045ca6164bbeb97021752a930416"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

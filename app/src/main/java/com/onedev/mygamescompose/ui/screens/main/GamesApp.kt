@@ -5,7 +5,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AccountBox
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -48,38 +47,12 @@ fun GamesApp(
             composable(Screen.Home.route) {
                 HomeScreen()
             }
-            composable(Screen.Search.route) {
-                Text(text = stringResource(R.string.search))
-            }
             composable(Screen.Profile.route) {
                 Text(text = stringResource(R.string.profile))
             }
         }
     }
 }
-//            composable(
-//                route = Screen.DetailReward.route,
-//                arguments = listOf(navArgument("rewardId") { type = NavType.LongType }),
-//            ) {
-//                val id = it.arguments?.getLong("rewardId") ?: -1L
-//                DetailScreen(
-//                    rewardId = id,
-//                    navigateBack = {
-//                        navController.navigateUp()
-//                    },
-//                    navigateToCart = {
-//                        navController.popBackStack()
-//                        navController.navigate(Screen.Cart.route) {
-//                            popUpTo(navController.graph.findStartDestination().id) {
-//                                saveState = true
-//                            }
-//                            restoreState = true
-//                            launchSingleTop = true
-//                        }
-//                    }
-//                )
-//            }
-//        }
 
 @Composable
 fun BottomNavigationBar(
@@ -96,11 +69,6 @@ fun BottomNavigationBar(
                 title = stringResource(R.string.home),
                 icon = Icons.Rounded.Home,
                 screen = Screen.Home
-            ),
-            NavigationItem(
-                title = stringResource(R.string.search),
-                icon = Icons.Rounded.Search,
-                screen = Screen.Search
             ),
             NavigationItem(
                 title = stringResource(R.string.profile),

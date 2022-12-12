@@ -4,17 +4,17 @@ import com.onedev.mygamescompose.core.data.source.remote.RemoteDataSource
 import com.onedev.mygamescompose.core.data.source.remote.network.ApiResponse
 import com.onedev.mygamescompose.core.data.source.remote.network.NetworkResource
 import com.onedev.mygamescompose.core.data.source.remote.network.StateEvent
-import com.onedev.mygamescompose.core.domain.model.Users
+import com.onedev.mygamescompose.core.domain.model.Games
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MainRepositoryImpl @Inject constructor (
     private val remoteDataSource: RemoteDataSource
 ) : MainRepository {
-    override fun users(): Flow<StateEvent<List<Users>>> =
-        object : NetworkResource<List<Users>>() {
-            override suspend fun createCall(): Flow<ApiResponse<List<Users>>> {
-                return remoteDataSource.users()
+    override fun games(pageSize: Int): Flow<StateEvent<List<Games>>> =
+        object : NetworkResource<List<Games>>() {
+            override suspend fun createCall(): Flow<ApiResponse<List<Games>>> {
+                return remoteDataSource.users(pageSize)
             }
         }.asFlow()
 }

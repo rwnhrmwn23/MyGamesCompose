@@ -1,6 +1,7 @@
 package com.onedev.mygamescompose.core.di
 
 import com.onedev.mygamescompose.BuildConfig
+import com.onedev.mygamescompose.BuildConfig.BASE_URL
 import com.onedev.mygamescompose.core.data.source.remote.network.ApiService
 import dagger.Module
 import dagger.Provides
@@ -30,7 +31,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://reqres.in/api/")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
