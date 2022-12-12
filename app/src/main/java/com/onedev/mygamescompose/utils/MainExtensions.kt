@@ -16,8 +16,8 @@ fun <T, U> Response<T>.asFlowStateEvent(mapper: (T) -> U): FlowState<U> {
                 val dataMapper = mapper.invoke(body)
                 ApiResponse.Success(dataMapper)
             } else {
-                val exception = Exception()
-                ApiResponse.Error(exception.stackTraceToString())
+                val exception = Throwable()
+                ApiResponse.Error(getErrorThrowableMsg(exception))
             }
         } catch (e: Throwable) {
             ApiResponse.Error(getErrorThrowableMsg(e))
