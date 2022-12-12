@@ -2,5 +2,9 @@
     <string name="app_name">MyGamesCompose</string>
     <string name="home">Home</string>
     <string name="profile">Profile</string>
+    <string name="name">Irwan Hermawan</string>
+    <string name="email">rwnhermawan@gmail.com</string>
     <string name="popular">Popular</string>
+    <string name="back">Back</string>
+    <string name="release">Release Date</string>
 </resources>

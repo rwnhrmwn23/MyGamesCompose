@@ -8,15 +8,9 @@ data class GamesResponse(
 ) {
     data class Result(
         val background_image: String?,
-        val genres: List<Genre>?,
         val id: Int?,
         val name: String?,
         val rating: Double?,
         val released: String?
-    ) {
-        data class Genre(
-            val id: Int?,
-            val name: String?
-        )
-    }
+    )
 }

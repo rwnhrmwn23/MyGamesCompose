@@ -1,14 +1,12 @@
 package com.onedev.mygamescompose.ui.screens.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -20,13 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.onedev.mygamescompose.R
 import com.onedev.mygamescompose.core.data.source.remote.network.StateEvent
-import com.onedev.mygamescompose.core.domain.model.Games
 import com.onedev.mygamescompose.ui.components.ErrorView
 import com.onedev.mygamescompose.ui.components.GameItem
 import com.onedev.mygamescompose.ui.components.LoadingView
 
 @Composable
 fun HomeScreen(
+    navigationToDetail: (Int?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -39,13 +37,16 @@ fun HomeScreen(
                 fontWeight = FontWeight.ExtraBold
             ),
         )
-        GamesScreen()
+        GamesScreen(
+            navigationToDetail = navigationToDetail
+        )
     }
 }
 
 @Composable
 fun GamesScreen(
-    homeViewModel: HomeViewModel = hiltViewModel()
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    navigationToDetail: (Int?) -> Unit
 ) {
     homeViewModel.games.collectAsState(initial = StateEvent.Loading()).value.let { response ->
         when (response) {
@@ -65,6 +66,9 @@ fun GamesScreen(
                                 photo = item.photo.toString(),
                                 name = item.name.toString(),
                                 date = item.released.toString(),
+                                modifier = Modifier.clickable {
+                                    navigationToDetail(item.id)
+                                }
                             )
                         }
                     }

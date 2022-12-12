@@ -1,9 +1,11 @@
 package com.onedev.mygamescompose.core.data.source.remote.network
 
 import com.onedev.mygamescompose.BuildConfig.API_KEY
+import com.onedev.mygamescompose.core.data.source.remote.response.GameDetailsResponse
 import com.onedev.mygamescompose.core.data.source.remote.response.GamesResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -12,4 +14,10 @@ interface ApiService {
         @Query("page_size") pageSize: Int,
         @Query("key") key: String? = API_KEY,
     ): Response<GamesResponse>
+
+    @GET("games/{id}")
+    suspend fun detailsGame(
+        @Path("id") id: Int,
+        @Query("key") key: String? = API_KEY,
+    ): Response<GameDetailsResponse>
 }

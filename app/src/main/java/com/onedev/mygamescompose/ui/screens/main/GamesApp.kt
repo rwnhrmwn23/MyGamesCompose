@@ -13,13 +13,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.onedev.mygamescompose.R
+import com.onedev.mygamescompose.ui.components.ProfileScreen
 import com.onedev.mygamescompose.ui.navigation.NavigationItem
 import com.onedev.mygamescompose.ui.navigation.Screen
+import com.onedev.mygamescompose.ui.screens.detail.DetailScreen
 import com.onedev.mygamescompose.ui.screens.home.HomeScreen
 import com.onedev.mygamescompose.ui.theme.MyGamesComposeTheme
 
@@ -45,10 +49,27 @@ fun GamesApp(
             startDestination = Screen.Home.route
         ) {
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(
+                    navigationToDetail = { id ->
+                        navController.navigate(Screen.DetailGames.createRoute(id))
+                    }
+                )
             }
             composable(Screen.Profile.route) {
-                Text(text = stringResource(R.string.profile))
+                ProfileScreen()
+            }
+            composable(
+                route = Screen.DetailGames.route,
+                arguments = listOf(navArgument("id") {
+                    type = NavType.IntType
+                })
+            ) {
+                val id = it.arguments?.getInt("id") ?: 0
+                DetailScreen(
+                    id = id,
+                    navigateBack = {
+                        navController.navigateUp()
+                    })
             }
         }
     }
